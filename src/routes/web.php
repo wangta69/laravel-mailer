@@ -16,4 +16,6 @@ Route::group(['prefix' => 'mailer', 'as' => 'mailer.', 'namespace' => 'Pondol\Ma
   // Route::get('smart-editor/photo-upload', array('uses'=>'SmartEditorController@upload'))->name('smarteditor.photo');
   // Route::post('smart-editor/photo-upload', array('uses'=>'SmartEditorController@uploadStore'));
   // Route::post('smart-editor/photo-upload/html5', array('uses'=>'SmartEditorController@uploadStoreHtml5'));
+
+  
 });
