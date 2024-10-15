@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Pondol\\Editor\\": "src/"
+      "Pondol\\Mailer\\": "src/"
     }
   },
   "extra": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pondol\Editor\Console;
+namespace Pondol\Mailer\Console;
 
 use Illuminate\Console\Command;
 // use Illuminate\Filesystem\Filesystem;
@@ -17,14 +17,14 @@ class InstallCommand extends Command
    *
    * @var string
    */
-  protected $signature = 'editor:install';
+  protected $signature = 'pondol:install-mailer {type=full}';
 
   /**
    * The console command description.
    *
    * @var string
    */
-  protected $description = 'Install the Laravel Editor controllers and resources';
+  protected $description = 'Install the Laravel Mailer controllers and resources';
 
 
   public function __construct()
@@ -34,19 +34,20 @@ class InstallCommand extends Command
 
   public function handle()
   {
-    return $this->installLaravelEditor();
+    $type = $this->argument('type');
+    return $this->installLaravelMailer($type);
   }
 
 
-  private function installLaravelEditor()
+  private function installLaravelMailer()
   {
 
-    \Artisan::call('storage:link');
-    \Artisan::call('vendor:publish',  [
-      '--force'=> true,
-      '--provider' => 'Pondol\Editor\EditorServiceProvider'
-    ]);
-    $this->info('The laravel editor installed successfully.'); 
+    if($type === 'full') {
+      // editor
+      $this->call('pondol:install-editor');
+    }
+
+    $this->info("The pondol's laravel mailer installed successfully.");
   }
 
 
