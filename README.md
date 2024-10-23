@@ -1,4 +1,4 @@
-# NAVER SMART Editor for Laravel
+# 라라벨용 메일발송 솔루션
 
 ## document
 
