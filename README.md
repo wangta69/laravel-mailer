@@ -12,9 +12,6 @@ php artisan pondol:install-mailer
 ```
 
 ## Tests
-
-
-
-
-
-  
+```
+your-domain/mailer/dashboard
+```

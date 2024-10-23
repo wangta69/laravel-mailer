@@ -10,12 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'mailer', 'as' => 'mailer.', 'namespace' => 'Pondol\Mailer', 'middleware' => ['web']], function () {
-  // Route::get('smart-editor', array('uses'=>'SmartEditorController@main'))->name('smarteditor');
-  // // Route::post('smart-editor', array('uses'=>'SmartEditorController@store'));
-  // Route::get('smart-editor/photo-upload', array('uses'=>'SmartEditorController@upload'))->name('smarteditor.photo');
-  // Route::post('smart-editor/photo-upload', array('uses'=>'SmartEditorController@uploadStore'));
-  // Route::post('smart-editor/photo-upload/html5', array('uses'=>'SmartEditorController@uploadStoreHtml5'));
-
-  
+Route::group(['prefix' => 'mailer', 'as' => 'mailer.', 'namespace' => 'Pondol\Mailer', 'middleware' => ['web', 'admin']], function () {
+  Route::get('dashboard', array('uses'=>'MailerController@dashboard'))->name('admin.dashboard');
+  Route::get('index', array('uses'=>'MailerController@index'))->name('admin.index');
+  Route::get('create', array('uses'=>'MailerController@create'))->name('admin.create');
+  Route::get('show', array('uses'=>'MailerController@show'))->name('admin.show');
+  Route::post('create', array('uses'=>'MailerController@store'));
+  // Route::get('admin', array('uses'=>'MailerController@index'))->name('admin');
 });

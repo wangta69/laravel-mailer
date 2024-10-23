@@ -17,7 +17,7 @@ class InstallCommand extends Command
    *
    * @var string
    */
-  protected $signature = 'pondol:install-mailer {type=full}';
+  protected $signature = 'pondol:install-mailer {type=full}'; // full | only
 
   /**
    * The console command description.
@@ -39,13 +39,21 @@ class InstallCommand extends Command
   }
 
 
-  private function installLaravelMailer()
+  private function installLaravelMailer($type)
   {
 
     if($type === 'full') {
       // editor
       $this->call('pondol:install-editor');
+
+      // editor
+      $this->call('pondol:install-auth', ['type'=>'simple']);
     }
+
+    \Artisan::call('vendor:publish',  [
+      '--force'=> true,
+      '--provider' => 'Pondol\Mailer\MailerServiceProvider'
+    ]);
 
     $this->info("The pondol's laravel mailer installed successfully.");
   }
