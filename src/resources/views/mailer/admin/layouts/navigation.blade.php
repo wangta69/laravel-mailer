@@ -9,7 +9,7 @@
       <a href="#mailer-sub-menu" data-bs-toggle="collapse" 
         aria-expanded="{{ request()->routeIs(['mailer.admin*']) ? 'true' : 'false' }}"
         class="dropdown-toggle">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa fa-envelope"></i>
           메일
       </a>
       <ul class="collapse list-unstyled {{ request()->routeIs(['mailer.admin*']) ? 'show' : '' }}" id="mailer-sub-menu">

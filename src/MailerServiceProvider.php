@@ -43,20 +43,7 @@ class MailerServiceProvider extends ServiceProvider {
    */
 	public function boot()
   {
-
- 
     $this->loadRoutesFrom(__DIR__.'/routes/web.php');
- 
-
-    // if(file_exists( app_path('/Listeners/NotificationEventSubscriber.php')  )) {
-    //   Event::subscribe(\App\Listeners\NotificationEventSubscriber::class);
-    // }
-    
-    // if (!$this->app->routesAreCached()) {
-    //   require_once __DIR__ . '/Https/routes/web.php';
-    // }
-    // $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-
     $this->loadViewsFrom(__DIR__.'/resources/views/mailer', 'mailer');
 
     // // set assets
@@ -66,10 +53,6 @@ class MailerServiceProvider extends ServiceProvider {
 
     $this->publishes([
       __DIR__.'/resources/views/mailer/templates' => resource_path('views/mailer/templates'),
-      // __DIR__.'/Events/' => app_path('Events'),
-      // __DIR__.'/Listeners/' => app_path('Listeners'),
-      // __DIR__.'/Notifications/' => app_path('Notifications'),
-      // __DIR__.'/Models/Mailer/' => app_path('Models/Mailer'),
       __DIR__.'/database/migrations/' => database_path('migrations')
     ]);
 

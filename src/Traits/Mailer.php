@@ -40,6 +40,11 @@ trait Mailer
     return $items;
   }
 
+  private function _receptionist($notification_id) {
+    $items = Notification::where('notification_id', $notification_id);
+    return $items;
+  }
+
   private function _store($request) {
     $obj = new \stdClass;
     $validator = Validator::make($request->all(), [

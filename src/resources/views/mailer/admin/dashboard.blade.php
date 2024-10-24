@@ -15,18 +15,18 @@
         <table class="table">
           <col width="*">
           <col width="120px">
-          {{-- 
-          @forelse ($users as $user)
+
+          @forelse ($items as $item)
           <tr>
-            <td>{{ $user->name }} ({{ $user->email }}) <span onclick="win_user('{{ route('auth.admin.user', $user->id) }}')"><i class="fas fa-search"></i></span></td>  
-            <td>{{ date('m-d H:m', strtotime($user->created_at)) }}</td>
+            <td>{{ $item->title }}</td>  
+            <td>{{ date('m-d H:m', strtotime($item->created_at)) }}</td>
           </tr>
           @empty
           <tr>
-            <td colspan="2">최근 가입된 회원이 존재하지 않습니다.</td>
+            <td colspan="2">최근 발송된 내역이 존재 하지 않습니다.</td>
           </tr>
           @endforelse
-          --}}
+
         </table>
       </div><!-- .card-body -->
       <div class="card-footer text-end">

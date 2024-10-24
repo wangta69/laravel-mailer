@@ -4,6 +4,9 @@ namespace Pondol\Mailer;
 use Illuminate\Http\Request;
 
 use App\Models\Auth\Role\Role;
+
+use Pondol\Mailer\Models\NotificationMessage;
+
 use Pondol\Mailer\Traits\Mailer;
 use App\Http\Controllers\Controller;
 class MailerController extends Controller
@@ -20,8 +23,9 @@ class MailerController extends Controller
     // $this->middleware('auth');
   }
 
-  public function dashboard() {
-    return view('mailer::admin.dashboard');
+  public function dashboard(Request $request) {
+    $items = $this->_index($request)->orderBy('id', 'desc')->skip(0)->take(5)->get();
+    return view('mailer::admin.dashboard', ['items'=>$items]);
   }
 
   public function index(Request $request) {
@@ -31,6 +35,18 @@ class MailerController extends Controller
       
     return view('mailer::admin.mailer.index', ['items'=>$items]);
   }
+
+  public function show(NotificationMessage $message, Request $request) {
+    $items = $this->_receptionist($message->id);
+    $items = $items->orderBy('id', 'desc')
+      ->paginate(20)->appends(request()->query());
+      
+    return view('mailer::admin.mailer.show', [
+      'message'=>$message,
+      'items'=>$items
+    ]);
+  }
+
 
   public function create() {
     return view('mailer::admin.mailer.create', ['roles' => Role::get()]);

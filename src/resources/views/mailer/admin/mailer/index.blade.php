@@ -68,39 +68,21 @@
       <col width="*">
       <col width="*">
       <col width="*">
-      <col width="*">
-      <col width="*">
       <thead>
         <tr>
-          <th class="text-center">
-            Id
-          </th>
-          <th class="text-center">
-            Title
-          </th>
-          <th class="text-center">
-            Body
-          </th>
-          <th class="text-center">
-            전송수단
-          </th>
-          <th class="text-center">
-            생성일
-          </th>
+          <th class="text-center">Id</th>
+          <th class="text-center">전송수단</th>
+          <th class="text-center">Title</th>
+          <th class="text-center">생성일</th>
         </tr>
       </thead>
       <tbody>
         @forelse($items as $item)
         <tr user-attr-id="{{ $item->id }}">
           <td class="text-center">{{ $item->id }}</td>
-          <td class="text-center">{{ $item->title }}</a></td>
-          <td class="text-center">{{ $item->body }} <a href="{{ route('mailer.admin.show', $item->id) }}')"><i class="fas fa-search"></i></a></td>
-
-
-          <td class="text-center"></td>
+          <td class="text-center">{{ $item->type }} </td>
+          <td class="text-center">{{ $item->title }}<a href="{{ route('mailer.admin.show', $item->id) }}"><i class="fas fa-search"></i></a></td>
           <td class="text-center">{{ date("Y-m-d H:i", strtotime($item->created_at)) }}</td>
-
-
         </tr>
         @empty
         <tr>
