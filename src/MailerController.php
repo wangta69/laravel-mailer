@@ -2,15 +2,9 @@
 namespace Pondol\Mailer;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Fluent;
 
-use Pondol\Mailer\Traits\Mailer;
 use App\Models\Auth\Role\Role;
-use App\Models\Auth\User\User;
-use App\Events\Mailed;
-
+use Pondol\Mailer\Traits\Mailer;
 use App\Http\Controllers\Controller;
 class MailerController extends Controller
 {
@@ -43,44 +37,11 @@ class MailerController extends Controller
   }
 
   public function store(Request $request) {
-    $validator = Validator::make($request->all(), [
-      'type' => ['required'],
-      'to' => ['required'],
-      'title' => ['required'],
-      'body' => ['required'],
-    ], [
-      
-    ]);
 
-
-    $validator->sometimes('recv_users', 'required', function (Fluent $input) {
-      return $input->to == 'individual';
-    });
-
-    $validator->sometimes('role', 'required', function (Fluent $input) {
-      \Log::info('input->to2:'.$input->to);
-      return $input->to == 'role';
-    });
-
-    if ($validator->fails()) {
-      // return response()->json(['error'=>$validator->errors()->first()]);
-      return redirect()->back()->withInput()->withErrors($validator->errors());
+    $result = $this->_store($request);
+    if($result->error == 'validator') {
+      return redirect()->back()->withInput()->withErrors($result->validator->errors());
     }
-
-    print_r($request->all());
-    // 먼저 내용을 저장
-    switch($request->to) {
-      case 'all':
-        break;
-      case 'individual':
-        $users = explode(',', $request->recv_users);
-        $user = User::whereIn('email', $users)->get();
-        break;
-      case 'role':
-        break;
-    }
-    
-    event(new Mailed($user, $request->title, $request->body));
   }
 
 

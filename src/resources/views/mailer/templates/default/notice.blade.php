@@ -11,9 +11,10 @@
         <a href="{{ config('app.url') }}" target="_blank" rel="noreferrer noopener" style="text-decoration: none;color: inherit;">{{ config('app.name') }}</a>
       </div>
 
-      @if($notifiable->name)
+
+      @if($user->name)
       <div style="padding: 20px 5px;">
-        안녕하세요. {{$notifiable->name}} 님 <br>
+        안녕하세요. {{$user->name}} 님 <br>
       </div>
       @endif
 

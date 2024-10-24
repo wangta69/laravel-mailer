@@ -9,11 +9,11 @@
       <span class="fw-bold">메일발송</span>
     </div>
 
-    <form method="POST" action="{{ route('mailer.admin.create') }}">
+    <form method="POST" action="{{ route('mailer.admin.create') }}" enctype="multipart/form-data">
     @csrf  
     <div class="card-body">
       <div>
-
+<!-- 
         <div class="form-check form-check-inline">
           <input type="checkbox" class="form-check-input" id="check-individual" name="type[]" value="mail" @if(old('type') && in_array('mail', old('type'))) checked @endif>
           <label class="form-check-label" for="check-individual">메일</label>
@@ -21,7 +21,7 @@
         <div class="form-check form-check-inline">
           <input type="checkbox" class="form-check-input" id="check-all" name="type[]" value="message" @if(old('type') && in_array('message', old('type'))) checked @endif >
           <label class="form-check-label" for="check-agent">메시지</label>
-        </div>
+        </div> -->
         <!-- <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" id="check-all" name="type" value="agent">
           <label class="form-check-label" for="check-agent">SMS</label>
@@ -31,22 +31,28 @@
       <div class="mt-3">
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input act-check-to" id="to-all" name="to" value="all" {{ old('to', 'all') == 'all' ? 'checked' : '' }}>
-          <label class="form-check-label" for="to-all">전체</label>
+          <label class="form-check-label" for="to-all">회원전체</label>
         </div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input act-check-to" id="to-individual" name="to" value="individual" {{ old('to') == 'individual' ? 'checked' : '' }}>
-          <label class="form-check-label" for="cto-individual">개별</label>
+          <label class="form-check-label" for="cto-individual">회원개별</label>
         </div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input act-check-to" id="to-role" name="to" value="role" {{ old('to') == 'role' ? 'checked' : '' }}>
-          <label class="form-check-label" for="to-role">권한별</label>
+          <label class="form-check-label" for="to-role">회원권한별</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input act-check-to" id="to-guest" name="to" value="guest" {{ old('to') == 'guest' ? 'checked' : '' }}>
+          <label class="form-check-label" for="to-guest">비회원</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input act-check-to" id="to-csv" name="to" value="csv" {{ old('to') == 'csv' ? 'checked' : '' }}>
+          <label class="form-check-label" for="to-csv">비회원(csv)</label>
         </div>
       </div>
 
       <div class="row mt-3 align-items-center d-none opt-show opt-show-to-individual">
-
         <label class="col col-md-2 form-control-label fw-bold">수신자</label>
-
         <div class="col col-md-10">
 
           <input type="text" name="recv_users" value="{{ old('recv_users') }}"
@@ -56,8 +62,7 @@
       </div>
 
       <div class="row mt-3 align-items-center d-none opt-show opt-show-to-role">
-
-          <label class="col col-md-2 form-control-label fw-bold">수신자</label>
+        <label class="col col-md-2 form-control-label fw-bold">수신자</label>
         <div class="col col-md-10">
           <select name="role" class="form-control">
             <option value="">선택</option>
@@ -65,6 +70,14 @@
             <option value="{{$role->id}}">{{$role->name}}</option>
             @endforeach
           </select>
+        </div>
+      </div>
+
+      <div class="row mt-3 align-items-center d-none opt-show opt-show-to-csv">
+
+        <label class="col col-md-2 form-control-label fw-bold">수신자</label>
+        <div class="col col-md-10">
+        <input type="file" name="csv"  class="form-control" accept=".csv">
         </div>
       </div>
 
@@ -109,10 +122,14 @@
 <script>
 var to = "{{old('to')}}";
 function showhide_option(v) {
+  console.log('showhide_option:', v);
   $(".opt-show").addClass('d-none');
   switch(v) {
-    case 'individual': $(".opt-show-to-individual").removeClass('d-none');break;
+    case 'individual': 
+    case 'guest': 
+      $(".opt-show-to-individual").removeClass('d-none');break;
     case 'role': $(".opt-show-to-role").removeClass('d-none');break;
+    case 'csv': $(".opt-show-to-csv").removeClass('d-none');break;
   }
 }
 

@@ -55,7 +55,11 @@ class InstallCommand extends Command
       '--provider' => 'Pondol\Mailer\MailerServiceProvider'
     ]);
 
+    
+    \Artisan::call('migrate');
+    
     $this->info("The pondol's laravel mailer installed successfully.");
+    
   }
 
 

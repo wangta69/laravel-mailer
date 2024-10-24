@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Mailer;
+namespace Pondol\Mailer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
