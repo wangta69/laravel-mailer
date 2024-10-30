@@ -16,23 +16,15 @@ class NotificationMail extends Mailable
    *
    * @return void
    */
-  public $user;
-  public $title;
-  public $body;
-  public function __construct($user, $title, $body)
+  public $params;
+  /**
+   * @params Object $params = {user, title, body, notify_id}
+   */
+  public function __construct($params)
   {
-
-    \Log::info('__construct NotificationMail');
-
-    
-    $this->user = $user;
-    $this->title = $title;
-    $this->body = $body;
-
-    \Log::info($this->user->email);
-    \Log::info($this->title);
-    \Log::info($this->body);
-    //
+    $this->params = $params;
+    \Log::info('NotificationMail __construct');
+    \Log::info(json_encode($this->params));
   }
 
   /**
@@ -42,10 +34,12 @@ class NotificationMail extends Mailable
    */
   public function build()
   {
-
-    \Log::info('build========================================');
     return $this
-      ->subject($this->title)
+      ->subject($this->params->title)
       ->view('mailer.templates.default.notice');
+  }
+
+  public function failed($e){
+    \Log::info('failed.......................................................');
   }
 }

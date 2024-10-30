@@ -20,6 +20,7 @@ class CreateMailer extends Migration
         $table->bigInteger('user_id')->nullable()->unsigned();
         $table->string('email');
         $table->string('name');
+        $table->tinyInteger('status')->default(0)->unsigned()->comment('0: ready, 1: success, 2: error');
         $table->timestamp('created_at');
       });
     }
@@ -39,6 +40,6 @@ class CreateMailer extends Migration
   public function down()
   {
     Schema::dropIfExists('notifications');
-    Schema::dropIfExists('market_notification_messagesbanks');
+    Schema::dropIfExists('notification_messages');
   }
 }

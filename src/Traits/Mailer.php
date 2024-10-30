@@ -7,7 +7,7 @@ use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Mail; // Mail 퍼사드 호출
 use Pondol\Mailer\Models\Notification;
 use Pondol\Mailer\Models\NotificationMessage;
-use App\Models\Auth\User\User;
+use Pondol\Auth\Models\User\User;
 use App\Events\Mailed;
 use Pondol\Mailer\Mail\NotificationMail;
 
@@ -75,7 +75,6 @@ trait Mailer
       return $obj;
     }
 
-
     // 먼저 내용을 저장
     switch($request->to) {
       case 'all':
@@ -125,8 +124,15 @@ trait Mailer
     $notification_id = $this->createNotificationMessage($request);
 
     foreach($user as $u) {
-      Mail::to($u)->queue(new NotificationMail($u, $request->title, $request->body));
-      $this->createNotifications($notification_id, $u);
+      
+      $params = (object)['user'=>$u, 'title'=>$request->title, 'body'=>$request->body];
+      $params->notify_id = $this->createNotifications($notification_id, $u);
+      
+      Mail::to($u)->queue(new NotificationMail($params));
+   
+
+      
+     
     }
 
     $obj->error = false;
@@ -148,6 +154,8 @@ trait Mailer
     $notify->user_id = isset($user->id) ? $user->id : null;
     $notify->email = $user->email;
     $notify->name = $user->name;
+    $notify->status = 0;
     $notify->save();
+    return $notify->id;
   }
 }

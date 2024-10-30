@@ -1,10 +1,8 @@
 <?php
 namespace Pondol\Mailer;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 
 class MailerServiceProvider extends ServiceProvider {
 
@@ -22,18 +20,6 @@ class MailerServiceProvider extends ServiceProvider {
    */
   public function register()
   {
-
-    if ($this->app->runningInConsole()) {
-      $this->commands([
-        Console\InstallCommand::class,
-      ]);
-    }
-
-   
-
-    // $this->app->singleton('mailer', function($app) {
-    //   return new Mailer;
-    // });
   }
 
 	/**
@@ -43,7 +29,22 @@ class MailerServiceProvider extends ServiceProvider {
    */
 	public function boot()
   {
-    $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+
+    $this->publishes([
+      __DIR__ . '/config/pondol-mailer.php' => config_path('pondol-mailer.php'),
+    ], 'config');
+    $this->mergeConfigFrom(
+      __DIR__ . '/config/pondol-mailer.php',
+      'pondol-mailer'
+    );
+
+    $this->loadMailerRoutes();
+
+    $this->commands([
+      Console\InstallCommand::class,
+    ]);
+
+
     $this->loadViewsFrom(__DIR__.'/resources/views/mailer', 'mailer');
 
     // // set assets
@@ -53,9 +54,22 @@ class MailerServiceProvider extends ServiceProvider {
 
     $this->publishes([
       __DIR__.'/resources/views/mailer/templates' => resource_path('views/mailer/templates'),
-      __DIR__.'/database/migrations/' => database_path('migrations')
     ]);
 
+    // Register migrations
+    $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+  }
+
+  private function loadMailerRoutes()
+  {
+    $config = config('pondol-mailer');
+
+    Route::prefix($config['prefix'])
+      ->as($config['as'])
+      ->middleware($config['middleware'])
+      ->namespace('Pondol\Mailer')
+      ->group(__DIR__ . '/routes/web.php');
   }
 
 

@@ -12,14 +12,14 @@
       </div>
 
 
-      @if($user->name)
+      @if($params->user->name)
       <div style="padding: 20px 5px;">
-        안녕하세요. {{$user->name}} 님 <br>
+        안녕하세요. {{$params->user->name}} 님 <br>
       </div>
       @endif
 
       <div style="padding: 20px;">
-        {!! nl2br($body) !!}
+        {!! nl2br($params->body) !!}
       </div>
     </div>
   <!-- Body End -->

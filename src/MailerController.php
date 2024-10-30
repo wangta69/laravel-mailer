@@ -3,7 +3,7 @@ namespace Pondol\Mailer;
 
 use Illuminate\Http\Request;
 
-use App\Models\Auth\Role\Role;
+use Pondol\Auth\Models\Role\Role;
 
 use Pondol\Mailer\Models\NotificationMessage;
 
@@ -58,6 +58,8 @@ class MailerController extends Controller
     if($result->error == 'validator') {
       return redirect()->back()->withInput()->withErrors($result->validator->errors());
     }
+
+    return redirect()->route('mailer.admin.index');
   }
 
 
