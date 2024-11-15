@@ -45,8 +45,9 @@ class InstallCommand extends Command
     if($type === 'full') {
       // editor
       $this->call('pondol:install-editor');
+      $this->call('pondol:install-common');
 
-      // editor
+      // auth
       $this->call('pondol:install-auth', ['type'=>'simple']);
     }
 
