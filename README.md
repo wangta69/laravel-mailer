@@ -16,7 +16,7 @@ php artisan pondol:install-mailer
 
 [queue:work 백그라운드 실행](https://www.onstory.fun/doc/programming/laravel/queues)
 
-## Tests
+## Admin page
 ```
 your-domain/mailer/dashboard
 ```

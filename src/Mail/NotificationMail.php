@@ -23,8 +23,6 @@ class NotificationMail extends Mailable
   public function __construct($params)
   {
     $this->params = $params;
-    \Log::info('NotificationMail __construct');
-    \Log::info(json_encode($this->params));
   }
 
   /**
@@ -40,6 +38,6 @@ class NotificationMail extends Mailable
   }
 
   public function failed($e){
-    \Log::info('failed.......................................................');
+    \Log::info('failed.');
   }
 }

@@ -25,7 +25,7 @@ class MailerController extends Controller
 
   public function dashboard(Request $request) {
     $items = $this->_index($request)->orderBy('id', 'desc')->skip(0)->take(5)->get();
-    return view('mailer::admin.dashboard', ['items'=>$items]);
+    return view('pondol-mailer::admin.dashboard', ['items'=>$items]);
   }
 
   public function index(Request $request) {
@@ -33,7 +33,7 @@ class MailerController extends Controller
     $items = $items->orderBy('id', 'desc')
       ->paginate(20)->appends(request()->query());
       
-    return view('mailer::admin.mailer.index', ['items'=>$items]);
+    return view('pondol-mailer::admin.mailer.index', ['items'=>$items]);
   }
 
   public function show(NotificationMessage $message, Request $request) {
@@ -41,7 +41,7 @@ class MailerController extends Controller
     $items = $items->orderBy('id', 'desc')
       ->paginate(20)->appends(request()->query());
       
-    return view('mailer::admin.mailer.show', [
+    return view('pondol-mailer::admin.mailer.show', [
       'message'=>$message,
       'items'=>$items
     ]);
@@ -49,7 +49,7 @@ class MailerController extends Controller
 
 
   public function create() {
-    return view('mailer::admin.mailer.create', ['roles' => Role::get()]);
+    return view('pondol-mailer::admin.mailer.create', ['roles' => Role::get()]);
   }
 
   public function store(Request $request) {

@@ -5,6 +5,8 @@ namespace Pondol\Mailer\Traits;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Mail; // Mail 퍼사드 호출
+use Carbon\Carbon;
+
 use Pondol\Mailer\Models\Notification;
 use Pondol\Mailer\Models\NotificationMessage;
 use Pondol\Auth\Models\User\User;
@@ -32,9 +34,14 @@ trait Mailer
       if (!$to_date) {
         $to_date = date("Y-m-d");
       }
-      $items = $items->where(function ($q) use($from_date, $to_date) {
-        $q->whereRaw("msg.created_at >= '".$from_date." 00:00:00' AND msg.created_at <= '".$to_date." 23:59:59'" );
-      });
+
+      $from_date = Carbon::createFromFormat('Y-m-d', $from_date);
+      $to_date = Carbon::createFromFormat('Y-m-d', $to_date);
+      $items =  $items->whereBetween('msg.created_at', [$from_date->startOfDay(), $to_date->endOfDay()]);
+
+      // $items = $items->where(function ($q) use($from_date, $to_date) {
+      //   $q->whereRaw("msg.created_at >= '".$from_date." 00:00:00' AND msg.created_at <= '".$to_date." 23:59:59'" );
+      // });
     }
 
     return $items;

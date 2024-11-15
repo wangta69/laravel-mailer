@@ -1,8 +1,5 @@
-@extends('mailer::.admin.layouts.main')
 @section('title', '메일발송')
-@section('content')
-@include('mailer::admin.layouts.main-top', ['path'=>['메일', '메일발송']])
-
+<x-pondol-common::app-simple-sidebar navigation="pondol-mailer::navigation" :path="['메일', '메일발송']">
 <div class="card">
        
     <div class="card-header">
@@ -115,7 +112,6 @@
 
   </form>
 </div>
-@endsection
 
 @section('scripts')
 @parent
@@ -144,6 +140,4 @@ $(function(){
 </script>
 @endsection
 
-@section('styles')
-@parent
-@endsection
+</x-pondol-common::app-simple-sidebar>

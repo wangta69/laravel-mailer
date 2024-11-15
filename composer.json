@@ -15,7 +15,8 @@
   "require": {
     "php": ">=7.0.0",
     "wangta69/laravel-auth": "^1",
-    "wangta69/laravel-editor": "^8"
+    "wangta69/laravel-editor": "^8",
+    "wangta69/laravel-pondol": "^0.0"
   },
   "autoload": {
     "psr-4": {

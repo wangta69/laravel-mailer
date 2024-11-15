@@ -1,7 +1,5 @@
-@extends('mailer::.admin.layouts.main')
 @section('title', '발송리스트')
-@section('content')
-@include('mailer::admin.layouts.main-top', ['path'=>['메일', '발송리스트']])
+<x-pondol-common::app-simple-sidebar navigation="pondol-mailer::navigation" :path="['메일', '발송리스트']">
 <div class="p-3 mb-4 bg-light rounded-3">
   <h2 class="fw-bold">발송리스트</h2>
 
@@ -98,12 +96,4 @@
     {{ $items->links("pagination::bootstrap-4") }}
   </div><!-- .card-footer -->
 </div><!-- .card -->
-@endsection
-
-@section('styles')
-@parent
-@endsection
-
-@section('scripts')
-@parent
-@endsection
+</x-pondol-common::app-simple-sidebar>

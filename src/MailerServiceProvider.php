@@ -45,15 +45,15 @@ class MailerServiceProvider extends ServiceProvider {
     ]);
 
 
-    $this->loadViewsFrom(__DIR__.'/resources/views/mailer', 'mailer');
+    $this->loadViewsFrom(__DIR__.'/resources/views', 'pondol-mailer');
 
     // // set assets
-		$this->publishes([
-      __DIR__.'/resources/pondol/mailer/' => public_path('pondol/mailer'),
-    ], 'public');
+		// $this->publishes([
+    //   __DIR__.'/resources/pondol/mailer/' => public_path('pondol/mailer'),
+    // ], 'public');
 
     $this->publishes([
-      __DIR__.'/resources/views/mailer/templates' => resource_path('views/mailer/templates'),
+      __DIR__.'/resources/views/templates' => resource_path('views/mailer/templates'),
     ]);
 
     // Register migrations
