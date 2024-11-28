@@ -14,9 +14,9 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.0.0",
-    "wangta69/laravel-auth": "^1",
-    "wangta69/laravel-editor": "^8",
-    "wangta69/laravel-pondol": "^0.0"
+    "wangta69/laravel-auth": "*",
+    "wangta69/laravel-editor": "*",
+    "wangta69/laravel-pondol": "*"
   },
   "autoload": {
     "psr-4": {
