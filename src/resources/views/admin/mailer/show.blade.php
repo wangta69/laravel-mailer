@@ -1,5 +1,8 @@
 @section('title', '발송리스트')
-<x-pondol-common::app-simple-sidebar navigation="pondol-mailer::navigation" :path="['메일', '발송리스트']">
+<x-dynamic-component 
+  :component="config('pondol-mailer.component.admin.layout')" 
+  :path="['메일', '발송리스트']">
+
 <div class="p-3 mb-4 bg-light rounded-3">
   <h2 class="fw-bold">발송리스트</h2>
 
@@ -78,4 +81,4 @@
     {{ $items->links("pagination::bootstrap-4") }}
   </div><!-- .card-footer -->
 </div><!-- .card -->
-</x-pondol-common::app-simple-sidebar>
+</x-dynamic-component>

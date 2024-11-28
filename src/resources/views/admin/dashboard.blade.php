@@ -1,6 +1,8 @@
 
 @section('title', '대쉬보드')
-<x-pondol-common::app-simple-sidebar navigation="pondol-mailer::navigation" :path="['대쉬보드']">
+<x-dynamic-component 
+  :component="config('pondol-mailer.component.admin.layout')" 
+  :path="['대쉬보드']">
 
   <div class="row">
     <div class="col-6">
@@ -35,4 +37,4 @@
   </div><!-- .row -->
   <div class="line"></div>
 
-</x-pondol-common::app-simple-sidebar>
+</x-dynamic-component>

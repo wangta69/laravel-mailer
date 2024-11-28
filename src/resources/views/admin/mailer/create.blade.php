@@ -1,7 +1,9 @@
 @section('title', '메일발송')
-<x-pondol-common::app-simple-sidebar navigation="pondol-mailer::navigation" :path="['메일', '메일발송']">
-<div class="card">
-       
+<x-dynamic-component 
+  :component="config('pondol-mailer.component.admin.layout')" 
+  :path="['메일', '메일발송']">
+
+<div class="card">   
     <div class="card-header">
       <span class="fw-bold">메일발송</span>
     </div>
@@ -140,4 +142,4 @@ $(function(){
 </script>
 @endsection
 
-</x-pondol-common::app-simple-sidebar>
+</x-dynamic-component>
