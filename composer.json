@@ -2,7 +2,7 @@
   "name": "wangta69/laravel-mailer",
   "description": "Admin Mailing system for laravel",
 	"keywords": ["laravel", "mailer", "메일링", "라라벨"],
-  "homepage": "https://www.onstory.fun/doc/programming/laravel/package.larave-mailer",
+  "homepage": "https://www.onstory.fun/packages/laravel-mailer",
   "license": "MIT",
   "authors": [
     {

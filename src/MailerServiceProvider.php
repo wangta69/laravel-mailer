@@ -29,10 +29,12 @@ class MailerServiceProvider extends ServiceProvider {
    */
 	public function boot()
   {
+    if (!config()->has('pondol-mailer')) {
+      $this->publishes([
+        __DIR__ . '/config/pondol-mailer.php' => config_path('pondol-mailer.php'),
+      ], 'config');
+    }
 
-    $this->publishes([
-      __DIR__ . '/config/pondol-mailer.php' => config_path('pondol-mailer.php'),
-    ], 'config');
     $this->mergeConfigFrom(
       __DIR__ . '/config/pondol-mailer.php',
       'pondol-mailer'
